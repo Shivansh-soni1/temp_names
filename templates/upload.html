@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSV / Excel Cleaner</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f6f9;
+            text-align: center;
+            padding-top: 40px;
+        }
+        .rules {
+            background: #fff3cd;
+            color: #856404;
+            width: 500px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #ffeeba;
+            text-align: left;
+            margin-bottom: 30px;
+        }
+        .box {
+            background: white;
+            width: 420px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<!-- RULES BOX -->
+<div class="rules">
+    <h3>📌 Upload Rules</h3>
+    <ul>
+        <li>Only <b>CSV</b> or <b>Excel (.xlsx, .xls)</b> files are allowed</li>
+        <li>File must contain a <b>State</b> column</li>
+        <li>File must contain a <b>District</b> column</li>
+        <li>Column names can vary (e.g. <i>state_name, district_name</i>)</li>
+        <li>If rules are violated, an error message will be shown</li>
+    </ul>
+</div>
+
+<!-- UPLOAD BOX -->
+<div class="box">
+    <h2>Upload CSV / Excel</h2>
+
+    <form action="/clean" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">Clean File</button>
+    </form>
+
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+</div>
+
+</body>
+</html>
